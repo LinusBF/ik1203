@@ -29,7 +29,7 @@ public class TCPClient {
     private static void writeToServer(String message, Socket s) throws IOException {
         BufferedReader br = new BufferedReader(new StringReader(message));
         DataOutputStream out = new DataOutputStream(s.getOutputStream());
-        String currentLine = null;
+        String currentLine;
 
         while ((currentLine = br.readLine()) != null) {
             out.writeBytes(currentLine + "\n");
@@ -39,14 +39,10 @@ public class TCPClient {
     private static String readServerResponse(Socket s) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
         StringBuilder sb = new StringBuilder();
-        String currentLine = null;
+        String currentLine;
         try {
-            while ((currentLine = br.readLine()) != null) {
-                sb.append(currentLine);
-            }
-        } catch (SocketTimeoutException e) {
-            sb.append("\n");
-        }
+            while ((currentLine = br.readLine()) != null) {sb.append(currentLine);}
+        } catch (SocketTimeoutException e) {sb.append("\n");}
 
         return sb.toString();
     }
