@@ -41,8 +41,8 @@ public class TCPClient {
         StringBuilder sb = new StringBuilder();
         String currentLine;
         try {
-            while ((currentLine = br.readLine()) != null) {sb.append(currentLine);}
-        } catch (SocketTimeoutException e) {sb.append("\n");}
+            while ((currentLine = br.readLine()) != null) {sb.append(currentLine).append("\n");}
+        } catch (SocketTimeoutException ignored){}
 
         return sb.toString();
     }
