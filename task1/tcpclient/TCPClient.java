@@ -39,9 +39,10 @@ public class TCPClient {
     private static String readServerResponse(Socket s) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
         StringBuilder sb = new StringBuilder();
-        String currentLine;
+        int currentChar;
+
         try {
-            while ((currentLine = br.readLine()) != null) {sb.append(currentLine).append("\n");}
+            while ((currentChar = br.read()) > 0) {sb.append((char) currentChar);}
         } catch (SocketTimeoutException ignored){}
 
         return sb.toString();
