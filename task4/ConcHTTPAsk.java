@@ -6,14 +6,14 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 @SuppressWarnings("ALL")
-public class HTTPAsk {
+public class ConcHTTPAsk {
     private ServerSocket serverSocket;
     public static void main(String[] args) throws IOException {
-        HTTPAsk server = new HTTPAsk(Integer.parseInt(args[0]));
+        ConcHTTPAsk server = new ConcHTTPAsk(Integer.parseInt(args[0]));
         server.startServer();
     }
 
-    private HTTPAsk(int port) throws IOException {
+    private ConcHTTPAsk(int port) throws IOException {
         serverSocket = new ServerSocket(port);
     }
 
@@ -104,7 +104,7 @@ public class HTTPAsk {
         private void doProxyRequest(DataOutputStream out) throws IOException {
             String serverResponse;
             try{
-                serverResponse = TCPClient.askServer(this.requestHost, this.requestPort, this.requestParams);
+                serverResponse = ConcTCPClient.askServer(this.requestHost, this.requestPort, this.requestParams);
             } catch (Exception e) {
                 serverResponse = "";
             }
@@ -132,7 +132,7 @@ public class HTTPAsk {
 }
 
 @SuppressWarnings("ALL")
-class TCPClient {
+class ConcTCPClient {
 
     static String askServer(String hostname, int port, String ToServer) throws IOException {
         Socket socket = setupSocket(hostname, port);
